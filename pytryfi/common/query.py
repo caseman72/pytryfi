@@ -90,6 +90,13 @@ def setLostDogMode(session: requests.Session, moduleId, action: bool):
     LOGGER.debug(f"setLostDogMode: {response}")
     return response['data']
 
+def updateWifiNetwork(session: requests.Session, householdId: str, ssid: str, latitude: float, longitude: float):
+    qString = MUTATION_UPDATE_WIFI_NETWORK + FRAGMENT_POSITION_COORDINATES
+    qVariables = json.dumps({"input": {"householdId": householdId, "ssid": ssid, "position": {"latitude": latitude, "longitude": longitude}}})
+    response = mutation(session, qString, qVariables)
+    LOGGER.debug(f"updateWifiNetwork: {response}")
+    return response['data']['updateWifiNetwork']
+
 def getGraphqlURL():
     return API_HOST_URL_BASE + API_GRAPHQL
 

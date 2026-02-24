@@ -28,7 +28,10 @@ class PyTryFi(object):
         houses = query.getHouseHolds(self._session)
         self._pets = []
         self._bases = []
+        self._householdId = None
         for house in houses:
+            if self._householdId is None:
+                self._householdId = house['household'].get('id')
             for pet in house['household']['pets']:
                 #If pet doesn't have a collar then ignore it. What good is a pet without a collar!
                 if pet['device'] != "None":
@@ -127,8 +130,14 @@ class PyTryFi(object):
     def userID(self):
         return self._userID
     @property
+    def householdId(self):
+        return self._householdId
+    @property
     def session(self):
         return self._session
+
+    def updateWifiNetwork(self, ssid, latitude, longitude):
+        return query.updateWifiNetwork(self._session, self._householdId, ssid, latitude, longitude)
 
     # login to the api and get a session
     def login(self, username: str, password: str):

@@ -29,7 +29,7 @@ QUERY_PET_REST = "query {  pet (id: \""+VAR_PET_ID+"\") {	dailyStat: restSummary
 QUERY_PET_DEVICE_DETAILS = "query {  pet (id: \""+VAR_PET_ID+"\") {    __typename    ...PetProfile  }}"
 
 FRAGMENT_USER_DETAILS = "fragment UserDetails on User {  __typename   id  email  firstName  lastName  phoneNumber }"
-FRAGMENT_USER_FULL_DETAILS = "fragment UserFullDetails on User {  __typename  ...UserDetails  userHouseholds {    __typename    household {      __typename      pets {        __typename        ...PetProfile      }      bases {        __typename        ...BaseDetails      }    }  }}"
+FRAGMENT_USER_FULL_DETAILS = "fragment UserFullDetails on User {  __typename  ...UserDetails  userHouseholds {    __typename    household {      __typename      id      pets {        __typename        ...PetProfile      }      bases {        __typename        ...BaseDetails      }    }  }}"
 FRAGEMENT_BASE_PET_PROFILE = "fragment BasePetProfile on BasePet {  __typename  id  name  homeCityState  yearOfBirth  monthOfBirth  dayOfBirth  gender  weight  isPurebred  breed {    __typename    ...BreedDetails  }  photos {    __typename    first {      __typename      ...PhotoDetails    }    items {      __typename      ...PhotoDetails    }  }  }"
 FRAGMENT_BREED_DETAILS = "fragment BreedDetails on Breed {  __typename  id  name  }"
 FRAGMENT_PHOTO_DETAILS = "fragment PhotoDetails on Photo {  __typename  id  date  image {    __typename    fullSize  }}"
@@ -47,3 +47,4 @@ FRAGMENT_ACTIVITY_SUMMARY_DETAILS = "fragment ActivitySummaryDetails on Activity
 FRAGMENT_REST_SUMMARY_DETAILS = "fragment RestSummaryDetails on RestSummary {  __typename  start  end  data {    __typename    ... on ConcreteRestSummaryData {      sleepAmounts {        __typename        type        duration      }    }  }}"
 MUTATION_DEVICE_OPS = "mutation UpdateDeviceOperationParams($input: UpdateDeviceOperationParamsInput!) {  updateDeviceOperationParams(input: $input) {    __typename    ...DeviceDetails  }}"
 MUTATION_SET_LED_COLOR = "mutation SetDeviceLed($moduleId: String!, $ledColorCode: Int!) {  setDeviceLed(moduleId: $moduleId, ledColorCode: $ledColorCode) {    __typename    ...DeviceDetails  }}"
+MUTATION_UPDATE_WIFI_NETWORK = "mutation UpdateWifiNetwork($input: UpdateWifiNetworkInput!) { updateWifiNetwork(input: $input) { ssid position { __typename ...PositionCoordinates } } }"
