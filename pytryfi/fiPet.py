@@ -119,7 +119,7 @@ class FiPet(object):
         sleep, nap = 0, 0
         sleepData = restObject['restSummaries'][0]['data']
         if not 'sleepAmounts' in sleepData:
-            LOGGER.warning(f"Can't extract sleep because sleepAmounts is missing: {restObject}")
+            LOGGER.debug(f"Can't extract sleep because sleepAmounts is missing: {restObject}")
             return None, None
         for sleepAmount in sleepData['sleepAmounts']:
             if sleepAmount['type'] == 'SLEEP':
